@@ -1,0 +1,12 @@
+# 忽略 Vim 的交换文件、临时文件和备份文件
+*.swp
+*.swo
+*.bak
+*.un~ 
+
+# 忽略 Vim 的目录
+.vim/plugged/
+.vim/swaps/
+.vim/undo/
+.vim/sessions/
+.vimbackup/
