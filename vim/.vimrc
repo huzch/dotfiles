@@ -1,103 +1,72 @@
-" If you open this file in Vim, it'll be syntax highlighted for you.
 
-" Vim is based on Vi. Setting `nocompatible` switches from the default
-" Vi-compatibility mode and enables useful Vim functionality. This
-" configuration option turns out not to be necessary for the file named
-" '~/.vimrc', because Vim automatically enters nocompatible mode if that file
-" is present. But we're including it here just in case this config file is
-" loaded some other way (e.g. saved as `foo`, and then Vim started with
-" `vim -u foo`).
-set nocompatible
+"========= Code =========
 
-" Turn on syntax highlighting.
-syntax on
+syntax on "启用语法高亮"
+highlight Comment ctermfg=Green "设置注释颜色"
 
-" Disable the default Vim startup message.
-set shortmess+=I
+set autoindent "跟随上一行的缩进"
+set smartindent "根据基本的语法结构缩进"
+set shiftwidth=4 "设置缩进宽度"
+set tabstop=4 "设置Tab宽度"
 
-" Show line numbers.
-set number
+set backspace=indent,eol,start "设置更灵活的退格键"
 
-" This enables relative line numbering mode. With both number and
-" relativenumber enabled, the current line shows the true line number, while
-" all other lines (above and below) are numbered relative to the current line.
-" This is useful because you can tell, at a glance, what count is needed to
-" jump up or down to a particular line, by {count}k to go up or {count}j to go
-" down.
-set relativenumber
+set clipboard=unnamedplus "设置vim使用系统剪切板"
 
-" Always show the status line at the bottom, even if you only have one window open.
-set laststatus=2
 
-" The backspace key has slightly unintuitive behavior by default. For example,
-" by default, you can't backspace before the insertion point set with 'i'.
-" This configuration makes backspace behave more reasonably, in that you can
-" backspace over anything.
-set backspace=indent,eol,start
 
-" By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
-" shown in any window) that has unsaved changes. This is to prevent you from 
-" forgetting about unsaved changes and then quitting e.g. via `:qa!`. We find
-" hidden buffers helpful enough to disable this protection. See `:help hidden`
-" for more information on this.
-set hidden
 
-" This setting makes search case-insensitive when all characters in the string
-" being searched are lowercase. However, the search becomes case-sensitive if
-" it contains any capital letters. This makes searching more convenient.
-set ignorecase
-set smartcase
+"========= Move =========
 
-" Enable searching as you type, rather than waiting till you press enter.
-set incsearch
+set number "设置行号"
+set relativenumber "设置相对行号"
+set laststatus=2 "设置常驻状态栏"
 
-" Unbind some useless/annoying default key bindings.
-nmap Q <Nop> 
+set ignorecase "默认不区分大小写搜索"
+set smartcase "搜索时若出现大写则区分大小写"
+set incsearch "启用增量搜索"
+set hlsearch "高亮搜索匹配项"
 
-" Disable audible bell because it's annoying.
-set noerrorbells visualbell t_vb=
+set mouse+=a "设置鼠标操控"
 
-" Enable mouse support. You should avoid relying on this too much, but it can
-" sometimes be convenient.
-"set mouse+=a
-
-" Try to prevent bad habits like using the arrow keys for movement. This is
-" not the only possible bad habit. For example, holding down the h/j/k/l keys
-" for movement, rather than using more efficient movement commands, is also a
-" bad habit. The former is enforceable through a .vimrc, while we don't know
-" how to prevent the latter.
-" Do this in normal mode...
+"抛弃新手拐杖
 nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
 nnoremap <Down>  :echoe "Use j"<CR>
-" ...and in insert mode
+
 inoremap <Left>  <ESC>:echoe "Use h"<CR>
 inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
-set autoindent        " 自动缩进，与上一行保持一致
-set smartindent       " 智能缩进，适用于代码文件（如 C/C++）
-set tabstop=4         " 设置 Tab 宽度为 4 个空格
-set shiftwidth=4      " 每次缩进的宽度为 4 个空格
-
-set clipboard=unnamedplus
 
 
-"插件安装
+
+"========= Disable =========
+
+set nocompatible "禁用兼容模式，启用vim现代特性"
+set shortmess+=I "省略vim初始化信息"
+set hidden "允许在不同缓冲区间自由切换，而不强制保存当前文件"
+set noerrorbells visualbell t_vb=
+nmap Q <Nop>
+
+
+
+
+"========= Plugin =========
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'kien/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
-"Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
 
-" 设置 coc.nvim 使用 clangd 作为 C++ 语言服务器
+"设置coc.nvim使用clangd作为C++语言服务器
 let g:coc_global_extensions = ['coc-clangd']
 
 
