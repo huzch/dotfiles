@@ -13,13 +13,34 @@ set backspace=indent,eol,start "设置更灵活的退格键"
 
 set clipboard=unnamedplus "设置vim使用系统剪切板"
 
+inoremap jj <Esc> "快速退出Insert模式"
+
+
+let mapleader=" " "设置leader键"
+
+"快速保存
+nmap <Leader>w :w<CR>
+nmap <Leader>q :q<CR>
+nmap <Leader>wq :wq<CR>
+nmap <Leader>Q :q!<CR>
+
+"快速与系统剪切板交互
+nmap <Leader>y "+y
+nmap <Leader>d "+d
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
 
 
 
 "========= Move =========
 
-set number "设置行号"
-set relativenumber "设置相对行号"
+set number "显示行号"
+set relativenumber "显示相对行号"
 set laststatus=2 "设置常驻状态栏"
 
 set ignorecase "默认不区分大小写搜索"
@@ -27,18 +48,27 @@ set smartcase "搜索时若出现大写则区分大小写"
 set incsearch "启用增量搜索"
 set hlsearch "高亮搜索匹配项"
 
-set mouse+=a "设置鼠标操控"
+set mouse+=a "启用鼠标操控"
 
 "抛弃新手拐杖
-nnoremap <Left>  :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up>    :echoe "Use k"<CR>
-nnoremap <Down>  :echoe "Use j"<CR>
+nnoremap <Down> <Nop>
+nnoremap <Left> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Up> <Nop>
 
-inoremap <Left>  <ESC>:echoe "Use h"<CR>
-inoremap <Right> <ESC>:echoe "Use l"<CR>
-inoremap <Up>    <ESC>:echoe "Use k"<CR>
-inoremap <Down>  <ESC>:echoe "Use j"<CR>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
+inoremap <Up> <Nop>
+
+vnoremap <Down> <Nop>
+vnoremap <Left> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Up> <Nop>
+
+"快速跳至行首行尾
+map H ^
+map L $
 
 
 
