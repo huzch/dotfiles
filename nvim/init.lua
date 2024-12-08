@@ -82,18 +82,24 @@ vim.keymap.set('n', 'Q', '<Nop>', { noremap = true, silent = true })
 
 --========= Plugin =========
 
-require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use 'kien/ctrlp.vim'
-  use 'jiangmiao/auto-pairs'
-  use 'tpope/vim-commentary'
-  use {
-    'neoclide/coc.nvim',
-    branch = 'release'
-  }
-end)
+-- 添加 lazy.nvim 插件到 runtimepath
+vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
 
--- 设置 coc.nvim 使用 clangd 作为 C++ 语言服务器
-vim.g.coc_global_extensions = {'coc-clangd'}
+-- 使用 lazy.nvim 管理插件
+require('lazy').setup({
+  'kien/ctrlp.vim',
+  'jiangmiao/auto-pairs',
+  'tpope/vim-commentary',
+
+  {
+    'neoclide/coc.nvim',
+    branch = 'release',
+    config = function()
+      -- 设置 coc.nvim 使用 clangd 作为 C++ 语言服务器
+      vim.g.coc_global_extensions = { 'coc-clangd' }
+    end
+  },
+})
+
 
 
