@@ -1,4 +1,4 @@
-
+	
 --========= Code =========
 
 vim.opt.autoindent = true --跟随上一行的缩进
@@ -31,7 +31,11 @@ vim.keymap.set('n', '<Leader>q', ':q<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Leader>wq', ':wq<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Leader>Q', ':q!<CR>', { noremap = true, silent = true })
 
-
+-- 快速格式化代码
+vim.keymap.set('n', '<Tab>', '>>', { noremap = true, silent = true })
+vim.keymap.set('n', '<S-Tab>', '<<', { noremap = true, silent = true })
+vim.keymap.set('v', '<Tab>', '>gv', { noremap = true, silent = true })
+vim.keymap.set('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 
 
 --========= Move =========
@@ -87,25 +91,35 @@ vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
 
 -- 使用 lazy.nvim 管理插件
 require('lazy').setup({
-  'kien/ctrlp.vim',
-  'jiangmiao/auto-pairs',
-  'tpope/vim-commentary',
+	{
 
-  {
-    'neoclide/coc.nvim',
-    branch = 'release',
-    config = function()
-      -- 设置 coc.nvim 使用 clangd 作为 C++ 语言服务器
-      vim.g.coc_global_extensions = { 'coc-clangd' }
+  		'kien/ctrlp.vim',
+		config = function()
+			vim.g.ctrlp_working_path_mode = 'ra'  -- 搜索根目录和当前目录
+			vim.g.ctrlp_by_filename = 1
+		end
+	},
 
-      -- 使用 <Tab> 和 <Shift-Tab> 进行补全选择
-      vim.keymap.set("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true, silent = true })
-      vim.keymap.set("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { expr = true, silent = true })
+	'jiangmiao/auto-pairs',
+	'tpope/vim-commentary',
+	'michaeljsmith/vim-indent-object',
+	'scrooloose/nerdtree',
 
-      -- 确认补全
-      vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], { expr = true, silent = true })
-  	end
-  },
+	{
+		'neoclide/coc.nvim',
+		branch = 'release',
+		config = function()
+		  -- 设置 coc.nvim 使用 clangd 作为 C++ 语言服务器
+		  vim.g.coc_global_extensions = { 'coc-clangd' }
+
+		  -- 使用 <Tab> 和 <Shift-Tab> 进行补全选择
+		  vim.keymap.set("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true, silent = true })
+		  vim.keymap.set("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { expr = true, silent = true })
+
+		  -- 确认补全
+		  vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], { expr = true, silent = true })
+		end
+	},
 })
 
 
