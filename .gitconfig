@@ -29,6 +29,7 @@
 [alias]
 	st = status
 	lg = log --all --graph --decorate --oneline
+	ci = commit
 
 [color]
 	ui = auto
