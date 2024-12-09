@@ -97,7 +97,14 @@ require('lazy').setup({
     config = function()
       -- 设置 coc.nvim 使用 clangd 作为 C++ 语言服务器
       vim.g.coc_global_extensions = { 'coc-clangd' }
-    end
+
+      -- 使用 <Tab> 和 <Shift-Tab> 进行补全选择
+      vim.keymap.set("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true, silent = true })
+      vim.keymap.set("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { expr = true, silent = true })
+
+      -- 确认补全
+      vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], { expr = true, silent = true })
+  	end
   },
 })
 
