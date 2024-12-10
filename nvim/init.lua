@@ -1,4 +1,4 @@
-	
+		
 --========= Code =========
 
 vim.opt.autoindent = true --跟随上一行的缩进
@@ -86,38 +86,69 @@ vim.keymap.set('n', 'Q', '<Nop>', { noremap = true, silent = true })
 
 --========= Plugin =========
 
--- 添加 lazy.nvim 插件到 runtimepath
-vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/lazy/lazy.nvim")
+-- 自动安装 lazy.nvim 插件管理器 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
 
 -- 使用 lazy.nvim 管理插件
 require('lazy').setup({
+	defaults = {
+		event = "VimEnter", --统一延迟加载所有插件，直到 Vim 启动完成
+	},
+	
+	'jiangmiao/auto-pairs',
+	'tpope/vim-commentary',
+	'michaeljsmith/vim-indent-object',
+	
 	{
-
   		'kien/ctrlp.vim',
 		config = function()
-			vim.g.ctrlp_working_path_mode = 'ra'  -- 搜索根目录和当前目录
+			vim.g.ctrlp_working_path_mode = 'ra'  --搜索根目录和当前目录
 			vim.g.ctrlp_by_filename = 1
 		end
 	},
 
-	'jiangmiao/auto-pairs',
-	'tpope/vim-commentary',
-	'michaeljsmith/vim-indent-object',
-	'scrooloose/nerdtree',
+	{
+		'scrooloose/nerdtree',
+		keys = {
+            { "<leader>n", ":NERDTreeToggle<CR>", desc = "Toggle NERDTree" },
+			{ "<leader>nf", ":NERDTreeFind<CR>", desc = "Find current file in NERDTree" },
+        },
+        config = function()
+            vim.g.NERDTreeWinSize = 30 --NERDTree窗口宽度
+            vim.g.NERDTreeShowHidden = 1 --显示隐藏文件
+        end,
+	},
 
 	{
 		'neoclide/coc.nvim',
 		branch = 'release',
+		ft = "cpp",
+		cmd = "CocInstall",
 		config = function()
-		  -- 设置 coc.nvim 使用 clangd 作为 C++ 语言服务器
-		  vim.g.coc_global_extensions = { 'coc-clangd' }
+			local filetype = vim.bo.filetype
 
-		  -- 使用 <Tab> 和 <Shift-Tab> 进行补全选择
-		  vim.keymap.set("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true, silent = true })
-		  vim.keymap.set("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { expr = true, silent = true })
+			if filetype == "cpp" then
+				-- 设置 coc.nvim 使用 clangd 作为 C++ 语言服务器
+				vim.g.coc_global_extensions = { 'coc-clangd' }
 
-		  -- 确认补全
-		  vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], { expr = true, silent = true })
+				-- 使用 <Tab> 和 <Shift-Tab> 进行补全选择
+				vim.keymap.set("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true, silent = true })
+				vim.keymap.set("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { expr = true, silent = true })
+
+				-- 确认补全
+				vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], { expr = true, silent = true })
+			end
 		end
 	},
 })
