@@ -35,6 +35,10 @@ vim.keymap.set('n', '<Leader>Q', ':q!<CR>', { noremap = true, silent = true })
 vim.keymap.set('v', '<Tab>', '>gv', { noremap = true, silent = true })
 vim.keymap.set('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 
+-- 快速分割窗口
+vim.keymap.set('n', '|', ':vsplit<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '-', ':split<CR>', { noremap = true, silent = true })
+
 
 --========= Move =========
 
@@ -107,12 +111,33 @@ require('lazy').setup({
 	'jiangmiao/auto-pairs',
 	'tpope/vim-commentary',
 	'michaeljsmith/vim-indent-object',
+
+	{
+		"christoomey/vim-tmux-navigator",
+		cmd = {
+			"TmuxNavigateLeft",
+			"TmuxNavigateDown",
+			"TmuxNavigateUp",
+			"TmuxNavigateRight",
+			"TmuxNavigatePrevious",
+		},
+		keys = {
+			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+		},
+	},
 	
 	{
   		'kien/ctrlp.vim',
+		keys = { 
+            { "<Leader>p", ":CtrlP<CR>", mode = "n", desc = "Open CtrlP" },
+        },
 		config = function()
-			vim.g.ctrlp_working_path_mode = 'ra'  --搜索根目录和当前目录
 			vim.g.ctrlp_by_filename = 1
+			vim.g.ctrlp_show_hidden = 1
 		end
 	},
 
