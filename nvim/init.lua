@@ -1,4 +1,4 @@
-		
+					
 --========= Code =========
 
 vim.opt.autoindent = true --跟随上一行的缩进
@@ -32,8 +32,6 @@ vim.keymap.set('n', '<Leader>wq', ':wq<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Leader>Q', ':q!<CR>', { noremap = true, silent = true })
 
 -- 快速格式化代码
-vim.keymap.set('n', '<Tab>', '>>', { noremap = true, silent = true })
-vim.keymap.set('n', '<S-Tab>', '<<', { noremap = true, silent = true })
 vim.keymap.set('v', '<Tab>', '>gv', { noremap = true, silent = true })
 vim.keymap.set('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 
