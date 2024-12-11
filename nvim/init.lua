@@ -112,7 +112,8 @@ require('lazy').setup({
 	
 	'jiangmiao/auto-pairs',
 	'tpope/vim-commentary',
-	'michaeljsmith/vim-indent-object',
+	'gcmt/wildfire.vim',
+	'tpope/vim-surround',
 
 	{
 		"christoomey/vim-tmux-navigator",
