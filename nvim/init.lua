@@ -40,6 +40,8 @@ vim.keymap.set('n', '|', ':vsplit<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '-', ':split<CR>', { noremap = true, silent = true })
 
 
+
+
 --========= Move =========
 
 vim.opt.number = true --显示行号
@@ -131,20 +133,26 @@ require('lazy').setup({
 	},
 	
 	{
-  		'kien/ctrlp.vim',
-		keys = { 
-            { "<Leader>p", ":CtrlP<CR>", mode = "n", desc = "Open CtrlP" },
-        },
+		"junegunn/fzf",
+		build = "./install --bin"
+	},
+
+
+	{
+		"ibhagwan/fzf-lua",
+		keys = {
+			{ "<c-P>", ":FzfLua files<CR>", desc = "Fzf Files" },
+		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			vim.g.ctrlp_by_filename = 1
-			vim.g.ctrlp_show_hidden = 1
+			require("fzf-lua").setup({})
 		end
 	},
 
 	{
 		'scrooloose/nerdtree',
 		keys = {
-            { "<leader>n", ":NERDTreeToggle<CR>", desc = "Toggle NERDTree" },
+			{ "<leader>nt", ":NERDTreeToggle<CR>", desc = "Toggle NERDTree" },
 			{ "<leader>nf", ":NERDTreeFind<CR>", desc = "Find current file in NERDTree" },
         },
         config = function()

@@ -85,5 +85,6 @@ alias lg='lazygit'
 
 # ========= Environment =========
 
+export PATH="$PATH:~/.local/share/nvim/lazy/fzf/bin"
 
-
+eval "$(fzf --bash)"
