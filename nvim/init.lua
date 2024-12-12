@@ -71,6 +71,12 @@ vim.keymap.set('v', '<Up>', '<Nop>', { noremap = true, silent = true })
 vim.keymap.set('n', 'H', '^', { noremap = true , silent = true })
 vim.keymap.set('n', 'L', '$', { noremap = true , silent = true })
 
+-- 快速窗格选择
+vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true , silent = true })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true , silent = true })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true , silent = true })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true , silent = true })
+
 
 
 
@@ -82,6 +88,8 @@ vim.opt.hidden = true --允许在不同缓冲区间自由切换，而不强制�
 
 vim.opt.errorbells = false --禁用错误铃声
 vim.opt.visualbell = true --使用视觉铃声
+
+vim.opt.showmode = false --禁用模式信息
 
 vim.keymap.set('n', 'Q', '<Nop>', { noremap = true, silent = true })
 
@@ -116,23 +124,32 @@ require('lazy').setup({
 	'tpope/vim-surround',
 
 	{
-		"christoomey/vim-tmux-navigator",
-		cmd = {
-			"TmuxNavigateLeft",
-			"TmuxNavigateDown",
-			"TmuxNavigateUp",
-			"TmuxNavigateRight",
-			"TmuxNavigatePrevious",
-		},
-		keys = {
-			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-		},
+		'joshdick/onedark.vim',
+		config = function()
+			vim.cmd('colorscheme onedark')
+		end
 	},
-	
+
+	{
+		'itchyny/lightline.vim',
+		config = function()
+			vim.cmd('colorscheme onedark')
+		end
+	},
+
+	{
+		'octol/vim-cpp-enhanced-highlight',
+		config = function()
+			vim.g.cpp_class_scope_highlight = 1
+			vim.g.cpp_member_variable_highlight = 1
+			vim.g.cpp_class_decl_highlight = 1
+			vim.g.cpp_posix_standard = 1
+			vim.g.cpp_experimental_simple_template_highlight = 1
+			vim.g.cpp_experimental_template_highlight = 1
+			vim.g.cpp_concepts_highlight = 1
+		end
+	},
+
 	{
 		"junegunn/fzf",
 		build = "./install --bin"
@@ -165,22 +182,53 @@ require('lazy').setup({
 	{
 		'neoclide/coc.nvim',
 		branch = 'release',
-		ft = "cpp",
-		cmd = "CocInstall",
+		-- ft = "cpp",
+		-- cmd = "CocInstall",
 		config = function()
 			local filetype = vim.bo.filetype
 
 			if filetype == "cpp" then
 				-- 设置 coc.nvim 使用 clangd 作为 C++ 语言服务器
 				vim.g.coc_global_extensions = { 'coc-clangd' }
-
-				-- 使用 <Tab> 和 <Shift-Tab> 进行补全选择
-				vim.keymap.set("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true, silent = true })
-				vim.keymap.set("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { expr = true, silent = true })
-
-				-- 确认补全
-				vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], { expr = true, silent = true })
 			end
+
+			-- 使用 <Tab> 和 <Shift-Tab> 进行补全选择
+			vim.keymap.set("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]], { expr = true, silent = true })
+			vim.keymap.set("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], { expr = true, silent = true })
+
+			-- 确认补全
+			vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]], { expr = true, silent = true })
+
+			-- 导航诊断
+			vim.keymap.set("n", "[g", "<Plug>(coc-diagnostic-prev)", {silent = true})
+			vim.keymap.set("n", "]g", "<Plug>(coc-diagnostic-next)", {silent = true})
+
+			-- 导航代码
+			vim.keymap.set("n", "gd", "<Plug>(coc-definition)", {silent = true})
+			vim.keymap.set("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
+			vim.keymap.set("n", "gi", "<Plug>(coc-implementation)", {silent = true})
+			vim.keymap.set("n", "gr", "<Plug>(coc-references)", {silent = true})
+
+			-- 显示文档
+			function _G.show_docs()
+				local cw = vim.fn.expand('<cword>')
+				if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
+					vim.api.nvim_command('h ' .. cw)
+				elseif vim.api.nvim_eval('coc#rpc#ready()') then
+					vim.fn.CocActionAsync('doHover')
+				else
+					vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
+				end
+			end
+			vim.keymap.set("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
+
+			-- 重命名符号
+			vim.keymap.set("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
+
+			-- 格式化代码
+			vim.keymap.set("x", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
+			vim.keymap.set("n", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
+			vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
 		end
 	},
 })

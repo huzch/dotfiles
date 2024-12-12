@@ -4,10 +4,12 @@
   "fzf": { "branch": "master", "commit": "bb55045596d6d08445f3c6d320c3ec2b457462d1" },
   "fzf-lua": { "branch": "main", "commit": "b7e4d478d0ba4cb8495a7b249fe53cf4613072cf" },
   "lazy.nvim": { "branch": "main", "commit": "7c493713bc2cb392706866eeba53aaef6c8e9fc6" },
+  "lightline.vim": { "branch": "master", "commit": "d6a07ea376a4b7372aa59e7ea6a051c9470bb4d0" },
   "nerdtree": { "branch": "master", "commit": "9b465acb2745beb988eff3c1e4aa75f349738230" },
   "nvim-web-devicons": { "branch": "master", "commit": "e73d2774d12d0ecf9e05578d692ba1ea50508cf2" },
+  "onedark.vim": { "branch": "main", "commit": "390b893d361c356ac1b00778d849815f2aa44ae4" },
   "vim-commentary": { "branch": "master", "commit": "64a654ef4a20db1727938338310209b6a63f60c9" },
+  "vim-cpp-enhanced-highlight": { "branch": "master", "commit": "4b7314a497ea2dd0a6911ccb94ce83b2d8684617" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
-  "vim-tmux-navigator": { "branch": "master", "commit": "424b5caa154bff34dc258ee53cec5a8e36cf7ea8" },
   "wildfire.vim": { "branch": "master", "commit": "dfcf48aad2e80c63272df67a1b81e37cbc443412" }
 }
