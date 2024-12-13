@@ -138,6 +138,13 @@ require('lazy').setup({
 	},
 
 	{
+		'edkolev/tmuxline.vim',
+		config = function()
+			vim.cmd(':Tmuxline')
+		end
+	},
+
+	{
 		'octol/vim-cpp-enhanced-highlight',
 		config = function()
 			vim.g.cpp_class_scope_highlight = 1
@@ -168,16 +175,55 @@ require('lazy').setup({
 	},
 
 	{
-		'scrooloose/nerdtree',
-		keys = {
-			{ "<leader>nt", ":NERDTreeToggle<CR>", desc = "Toggle NERDTree" },
-			{ "<leader>nf", ":NERDTreeFind<CR>", desc = "Find current file in NERDTree" },
+        'nvim-tree/nvim-tree.lua',
+        keys = {
+            { "<leader>nt", ":NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
+			{ "<leader>nf", ":NvimTreeFindFile<CR>", desc = "Find current file in NvimTree" },
         },
+        dependencies = { 'nvim-tree/nvim-web-devicons' }, -- 图标支持
         config = function()
-            vim.g.NERDTreeWinSize = 30 --NERDTree窗口宽度
-            vim.g.NERDTreeShowHidden = 1 --显示隐藏文件
+            require("nvim-tree").setup({
+                -- 禁用 netrw，以便 nvim-tree 接管
+                disable_netrw = true,
+                hijack_netrw = true,
+                
+                -- 更新文件树以跟踪当前文件
+                update_focused_file = {
+                    enable = true,
+                    update_cwd = true,
+                },
+
+                -- 视图配置
+                view = {
+                    width = 30, -- 文件树宽度
+                    side = "left", -- 默认在左侧显示
+                },
+
+                -- 文件过滤器
+                filters = {
+                    dotfiles = false,
+                },
+
+                -- 文件图标
+                renderer = {
+                    icons = {
+                        show = {
+                            git = false,
+                            folder = true,
+                            file = true,
+                            folder_arrow = false,
+                        },
+                    },
+                },
+
+                -- Git 集成
+                git = {
+                    enable = true,
+                    ignore = true,
+                },
+            })
         end,
-	},
+    },
 
 	{
 		'neoclide/coc.nvim',
