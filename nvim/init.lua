@@ -140,7 +140,10 @@ require('lazy').setup({
 	{
 		'edkolev/tmuxline.vim',
 		config = function()
-			vim.cmd(':Tmuxline')
+			-- 检查是否在 tmux 环境中
+			if vim.fn.has('term') == 1 and vim.fn.getenv('TMUX') ~= "" then
+				vim.cmd(':Tmuxline')
+			end
 		end
 	},
 
@@ -175,55 +178,76 @@ require('lazy').setup({
 	},
 
 	{
-        'nvim-tree/nvim-tree.lua',
-        keys = {
-            { "<leader>nt", ":NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
+		'nvim-tree/nvim-tree.lua',
+		keys = {
+			{ "<leader>nt", ":NvimTreeToggle<CR>",   desc = "Toggle NvimTree" },
 			{ "<leader>nf", ":NvimTreeFindFile<CR>", desc = "Find current file in NvimTree" },
-        },
-        dependencies = { 'nvim-tree/nvim-web-devicons' }, -- 图标支持
-        config = function()
-            require("nvim-tree").setup({
-                -- 禁用 netrw，以便 nvim-tree 接管
-                disable_netrw = true,
-                hijack_netrw = true,
-                
-                -- 更新文件树以跟踪当前文件
-                update_focused_file = {
-                    enable = true,
-                    update_cwd = true,
-                },
+		},
+		dependencies = { 'nvim-tree/nvim-web-devicons' }, -- 图标支持
+		config = function()
+			require("nvim-tree").setup({
+				-- 文件过滤器
+				filters = {
+					dotfiles = true,
+				},
 
-                -- 视图配置
-                view = {
-                    width = 30, -- 文件树宽度
-                    side = "left", -- 默认在左侧显示
-                },
+				git = {
+					ignore = true,
+				},
 
-                -- 文件过滤器
-                filters = {
-                    dotfiles = false,
-                },
+				update_focused_file = {
+					enable = true,
+					update_cwd = true,
+				},
 
-                -- 文件图标
-                renderer = {
-                    icons = {
-                        show = {
-                            git = false,
-                            folder = true,
-                            file = true,
-                            folder_arrow = false,
-                        },
-                    },
-                },
-
-                -- Git 集成
-                git = {
-                    enable = true,
-                    ignore = true,
-                },
-            })
-        end,
+				-- 文件图标
+				renderer = {
+					icons = {
+						show = {
+							git = false,
+							folder = false,
+							file = false,
+							folder_arrow = true,
+						},
+						glyphs = {
+							default = "📄", -- 默认文件图标
+							symlink = "🔗", -- 符号链接文件图标
+							folder = { -- 文件夹相关图标
+								arrow_closed = "▸", -- 关闭状态的箭头图标
+								arrow_open = "▾", -- 打开状态的箭头图标
+								default = "📁", -- 默认文件夹图标
+								open = "📂", -- 打开状态的文件夹图标
+								empty = "🗀", -- 空文件夹图标
+								empty_open = "🗁", -- 打开状态的空文件夹图标
+								symlink = "🔗", -- 符号链接文件夹图标
+								symlink_open = "🔗", -- 打开状态的符号链接文件夹图标
+							},
+						},
+					},
+				},
+			})
+		end
     },
+
+	{
+		"nvim-tree/nvim-web-devicons", -- 图标插件
+		config = function()
+			require("nvim-web-devicons").setup({
+				override = {
+					lua = { icon = "🌙", color = "#51a0cf", cterm_color = "74", name = "Lua" },
+					html = { icon = "🌐", color = "#e34c26", cterm_color = "196", name = "Html" },
+					css = { icon = "🎨", color = "#563d7c", cterm_color = "60", name = "Css" },
+					js = { icon = "📜", color = "#f1e05a", cterm_color = "220", name = "Js" },
+					json = { icon = "📊", color = "#f44d27", cterm_color = "202", name = "Json" },
+					md = { icon = "📖", color = "#519aba", cterm_color = "67", name = "Markdown" },
+					txt = { icon = "📄", color = "#89e051", cterm_color = "113", name = "Text" },
+					sh = { icon = "📝", color = "#4caf50", cterm_color = "65", name = "ShellScript" },
+					cpp = { icon = "🌟", color = "#29b6f6", cterm_color = "33", name = "Cpp" },
+				},
+				default = true, -- 启用默认图标
+			})
+		end,
+	},
 
 	{
 		'neoclide/coc.nvim',
