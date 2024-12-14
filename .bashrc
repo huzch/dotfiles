@@ -60,7 +60,12 @@ xterm*|rxvt*)
     ;;
 esac
 
-
+# 显示系统信息
+clear
+if command -v neofetch &> /dev/null
+then
+    neofetch
+fi
 
 
 
