@@ -140,10 +140,7 @@ require('lazy').setup({
 	{
 		'edkolev/tmuxline.vim',
 		config = function()
-			-- 检查是否在 tmux 环境中
-			if vim.fn.has('term') == 1 and vim.fn.getenv('TMUX') ~= "" then
-				vim.cmd(':Tmuxline')
-			end
+			vim.cmd(':Tmuxline')
 		end
 	},
 
@@ -157,6 +154,37 @@ require('lazy').setup({
 			vim.g.cpp_experimental_simple_template_highlight = 1
 			vim.g.cpp_experimental_template_highlight = 1
 			vim.g.cpp_concepts_highlight = 1
+		end
+	},
+
+	{
+		'nvim-treesitter/nvim-treesitter',
+		build = ':TSUpdate',
+		config = function()
+			require 'nvim-treesitter.configs'.setup {
+				ensure_installed = { "cpp", "lua" },
+
+				-- 语法高亮
+				highlight = {
+					enable = false,
+					additional_vim_regex_highlighting = false, -- 禁用额外的 Vim 正则表达式高亮
+				},
+
+				-- 增量选择
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "<CR>", -- 初始化选择
+						node_incremental = "<CR>", -- 增加选择
+						node_decremental = "<BS>", -- 减少选择
+					},
+				},
+
+				-- 自动缩进
+				indent = {
+					enable = true,
+				},
+			}
 		end
 	},
 
