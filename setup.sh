@@ -3,8 +3,7 @@
 # 符号链接，覆盖配置文件
 ln -sf ~/dotfiles/.bashrc ~/.bashrc && echo "Linked .bashrc"
 ln -sf ~/dotfiles/.vimrc ~/.vimrc && echo "Linked .vimrc"
-ln -sf ~/dotfiles/nvim/init.lua ~/.config/nvim/init.lua && echo "Linked Neovim init.lua"
-ln -sf ~/dotfiles/nvim/lazy-lock.json ~/.config/nvim/lazy-lock.json && echo "Linked Neovim lazy-lock.json"
+ln -sf ~/dotfiles/nvim ~/.config && echo "Linked nvim"
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf && echo "Linked .tmux.conf"
 ln -sf ~/dotfiles/.gitconfig ~/.gitconfig && echo "Linked .gitconfig"
 ln -sf ~/dotfiles/.ssh/config ~/.ssh/config && echo "Linked SSH config"
