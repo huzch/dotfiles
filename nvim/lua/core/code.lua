@@ -9,14 +9,14 @@ vim.opt.backspace = "indent,eol,start" --更灵活的退格键
 vim.opt.clipboard = "unnamedplus" --使用系统剪切板
 
 -- 用 Ctrl+o 代替 Esc
-vim.keymap.set('i', '<C-o>', '<Esc>', { noremap = true, silent = true })
-vim.keymap.set('v', '<C-o>', '<Esc>', { noremap = true, silent = true })
-vim.keymap.set('s', '<C-o>', '<Esc>', { noremap = true, silent = true })
-vim.keymap.set('x', '<C-o>', '<Esc>', { noremap = true, silent = true })
-vim.keymap.set('c', '<C-o>', '<Esc>', { noremap = true, silent = true })
-vim.keymap.set('o', '<C-o>', '<Esc>', { noremap = true, silent = true })
-vim.keymap.set('l', '<C-o>', '<Esc>', { noremap = true, silent = true })
-vim.keymap.set('t', '<C-o>', '<Esc>', { noremap = true, silent = true })
+-- vim.keymap.set('i', '<C-o>', '<Esc>', { noremap = true, silent = true })
+-- vim.keymap.set('v', '<C-o>', '<Esc>', { noremap = true, silent = true })
+-- vim.keymap.set('s', '<C-o>', '<Esc>', { noremap = true, silent = true })
+-- vim.keymap.set('x', '<C-o>', '<Esc>', { noremap = true, silent = true })
+-- vim.keymap.set('c', '<C-o>', '<Esc>', { noremap = true, silent = true })
+-- vim.keymap.set('o', '<C-o>', '<Esc>', { noremap = true, silent = true })
+-- vim.keymap.set('l', '<C-o>', '<Esc>', { noremap = true, silent = true })
+-- vim.keymap.set('t', '<C-o>', '<Esc>', { noremap = true, silent = true })
 
 
 
