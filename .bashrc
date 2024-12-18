@@ -28,6 +28,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+set -o vi #开启vim模式
+
 
 
 
