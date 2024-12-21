@@ -1,6 +1,8 @@
 return {
 	'edkolev/tmuxline.vim',
 	config = function()
-		vim.cmd(':Tmuxline')
+		if os.getenv("TMUX") then
+			vim.cmd(':Tmuxline')
+		end
 	end
 }
