@@ -18,6 +18,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- 启用 runtime loader 高效加载插件
+vim.loader.enable()
+
 -- 使用 lazy.nvim 管理插件
 require('lazy').setup(require('plugins'))
 
