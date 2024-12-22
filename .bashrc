@@ -98,5 +98,9 @@ alias lg='lazygit'
 export PATH="$PATH:~/.local/share/nvim/lazy/fzf/bin"
 eval "$(fzf --bash)"
 
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
