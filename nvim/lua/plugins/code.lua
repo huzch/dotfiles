@@ -47,4 +47,17 @@ return {
 			})
 		end
 	},
+
+	{
+		'iamcco/markdown-preview.nvim',
+		build = 'cd app && npm install',
+		ft = 'markdown',
+		keys = {
+			{"<leader>md", ":MarkdownPreviewToggle<CR>", desc = "Toggle MarkdownPreview"},
+		},
+		config = function()
+			vim.g.mkdp_auto_start = 1
+			vim.g.mkdp_auto_close = 1
+		end,
+	},
 }
