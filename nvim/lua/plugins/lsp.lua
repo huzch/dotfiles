@@ -15,6 +15,7 @@ return {
 	{
 		'neoclide/coc.nvim',
 		branch = 'release',
+		event = "InsertEnter",
 		config = function()
 			local filetype = vim.bo.filetype
 			if filetype == "cpp" then
@@ -22,11 +23,11 @@ return {
 			end
 
 			-- 补全选择
-			vim.keymap.set("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]],
+			vim.keymap.set("i", "<C-j>", [[coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"]],
 				{ expr = true, silent = true })
-			vim.keymap.set("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]],
+			vim.keymap.set("i", "<C-k>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]],
 				{ expr = true, silent = true })
-			vim.keymap.set("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]],
+			vim.keymap.set("i", "<Tab>", [[coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]],
 				{ expr = true, silent = true })
 
 			-- 导航诊断
