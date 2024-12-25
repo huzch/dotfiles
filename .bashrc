@@ -90,7 +90,9 @@ alias l='ls -CF'
 
 alias lg='lazygit'
 
+alias edge='/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe'
 
+alias steam='/mnt/d/Steam/steam.exe'
 
 
 # ========= Environment =========
@@ -104,3 +106,17 @@ export VISUAL="nvim"
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+
+
+# ========= Function =========
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
