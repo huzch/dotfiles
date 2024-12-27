@@ -1,5 +1,3 @@
-
-
 [user]
 	name = huzch
 	email = huzch123@gmail.com
@@ -8,23 +6,23 @@
 	defaultBranch = main
 
 [core]
-    editor = nvim
-    autocrlf = input #控制换行符行为：input适用于Unix系统，true适用于Windows
-    safecrlf = true #防止不一致的换行符提交
-    excludesfile = ~/.gitignore_global
+	editor = nvim
+	autocrlf = input #控制换行符行为：input适用于Unix系统，true适用于Windows
+	safecrlf = true #防止不一致的换行符提交
+	excludesfile = ~/.gitignore_global
 
 [merge]
-    tool = nvim
+	tool = nvim
 
 [diff]
-    tool = nvimdiff
+	tool = nvimdiff
 
 [push]
-    default = simple
+	default = simple
 
 [pull]
-    rebase = false
-    ff = only #如果不能快进合并，则拒绝 pull
+	rebase = false
+	ff = only #如果不能快进合并，则拒绝 pull
 
 [alias]
 	st = status
@@ -35,6 +33,6 @@
 	ui = auto
 
 [log]
-    date = relative
+	date = relative
 
 
