@@ -27,8 +27,8 @@ return {
 			require('nvim-treesitter.configs').setup({
 				ensure_installed = { 'cpp', 'lua' },
 				highlight = {
-					enable = false,
-					additional_vim_regex_highlighting = false,
+					enable = true,
+					additional_vim_regex_highlighting = true,
 				},
 
 				-- 增量选择
@@ -53,7 +53,7 @@ return {
 		build = 'cd app && npm install',
 		ft = 'markdown',
 		keys = {
-			{"<leader>md", ":MarkdownPreviewToggle<CR>", desc = "Toggle MarkdownPreview"},
+			{ "<leader>md", ":MarkdownPreviewToggle<CR>", desc = "Toggle MarkdownPreview" },
 		},
 		config = function()
 			vim.g.mkdp_auto_start = 1
