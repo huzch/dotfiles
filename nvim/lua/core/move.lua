@@ -26,11 +26,11 @@ vim.keymap.set('v', '<Up>', '<Nop>', { noremap = true, silent = true })
 vim.keymap.set('n', 'H', '^', { noremap = true , silent = true })
 vim.keymap.set('n', 'L', '$', { noremap = true , silent = true })
 
--- 快速跳至文件开头和文件结尾
-vim.keymap.set('n', 'K', 'gg', { noremap = true , silent = true })
-vim.keymap.set('n', 'J', 'G', { noremap = true , silent = true })
-vim.keymap.set('v', 'K', 'gg', { noremap = true , silent = true })
-vim.keymap.set('v', 'J', 'G', { noremap = true , silent = true })
+-- 快速跳至上下10行
+vim.keymap.set('n', 'K', '10k', { noremap = true , silent = true })
+vim.keymap.set('n', 'J', '10j', { noremap = true , silent = true })
+vim.keymap.set('v', 'K', '10k', { noremap = true , silent = true })
+vim.keymap.set('v', 'J', '10j', { noremap = true , silent = true })
 
 -- 快速窗格选择
 vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true , silent = true })
