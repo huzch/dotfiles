@@ -64,9 +64,9 @@ esac
 
 # 显示系统信息
 clear
-if command -v neofetch &> /dev/null
+if command -v fastfetch &> /dev/null
 then
-    neofetch
+    fastfetch
 fi
 
 
