@@ -5,6 +5,7 @@ ln -sf ~/dotfiles/.bashrc ~/.bashrc && echo "Linked .bashrc"
 ln -sf ~/dotfiles/.vimrc ~/.vimrc && echo "Linked .vimrc"
 ln -sf ~/dotfiles/nvim ~/.config && echo "Linked nvim"
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf && echo "Linked .tmux.conf"
+ln -sf ~/dotfiles/.gdbinit ~/.gdbinit && echo "Linked .gdbinit"
 ln -sf ~/dotfiles/.gitconfig ~/.gitconfig && echo "Linked .gitconfig"
 ln -sf ~/dotfiles/.ssh/config ~/.ssh/config && echo "Linked SSH config"
 
