@@ -2,6 +2,7 @@
 
 # 符号链接，覆盖配置文件
 ln -sf ~/dotfiles/.bashrc ~/.bashrc && echo "Linked .bashrc"
+ln -sf ~/dotfiles/fastfetch ~/.config && echo "Linked fastfetch"
 ln -sf ~/dotfiles/.vimrc ~/.vimrc && echo "Linked .vimrc"
 ln -sf ~/dotfiles/nvim ~/.config && echo "Linked nvim"
 ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf && echo "Linked .tmux.conf"
