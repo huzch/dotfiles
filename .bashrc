@@ -97,7 +97,7 @@ alias steam='/mnt/d/Steam/steam.exe'
 
 # ========= Environment =========
 
-export PATH="$PATH:~/.local/share/nvim/lazy/fzf/bin"
+# export PATH="$PATH:~/.local/share/nvim/lazy/fzf/bin"
 eval "$(fzf --bash)"
 
 export EDITOR="nvim"

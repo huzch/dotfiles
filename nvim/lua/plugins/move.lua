@@ -1,8 +1,8 @@
 return {
-	{
-		'junegunn/fzf',
-		build = './install --bin',
-	},
+	-- {
+	-- 	'junegunn/fzf',
+	-- 	build = './install --bin',
+	-- },
 
 	{
 		'ibhagwan/fzf-lua',
