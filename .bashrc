@@ -35,11 +35,6 @@ set -o vi #开启vim模式
 
 # ========= Prompt =========
 
-# 识别chroot环境信息
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 # 判断终端是否支持颜色
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -47,9 +42,13 @@ esac
 
 # 设置 PS1（提示符样式）
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='
+\[\033[38;5;245m\]\w\[\033[00m\]
+\[\033[38;5;75m\]➜ \[\033[00m\]'  # 第一行显示路径，第二行显示箭头
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='
+\w
+➜ '
 fi
 unset color_prompt 
 
