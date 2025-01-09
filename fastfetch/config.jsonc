@@ -22,13 +22,13 @@
     "cpu",
     "gpu",
     "memory",
-    //"swap",
+    "swap",
     "disk",
     "localip",
     "battery",
     //"poweradapter",
     //"locale",
-    //"break",
+    "break",
     "colors"
   ]
 }
