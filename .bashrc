@@ -52,15 +52,6 @@ else
 fi
 unset color_prompt 
 
-# 如果是 xterm，设置窗口标题
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # 显示系统信息
 clear
 if command -v fastfetch &> /dev/null
@@ -87,24 +78,23 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias cl='clear'
 alias lg='lazygit'
-
+alias ff='fastfetch'
 alias edge='/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe'
-
 alias steam='/mnt/d/Steam/steam.exe'
+
+
 
 
 # ========= Environment =========
 
 # export PATH="$PATH:~/.local/share/nvim/lazy/fzf/bin"
 eval "$(fzf --bash)"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-
-
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 
 
