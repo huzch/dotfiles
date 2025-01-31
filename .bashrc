@@ -82,9 +82,8 @@ alias c='clear'
 alias x='startx'
 alias lg='lazygit'
 alias ff='fastfetch'
-alias edge='/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe'
-alias steam='/mnt/d/Steam/steam.exe'
-
+alias sl='slock'
+alias dl='dm-tool lock'
 
 
 
