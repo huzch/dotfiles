@@ -84,6 +84,8 @@ alias lg='lazygit'
 alias ff='fastfetch'
 alias sl='slock'
 alias dl='dm-tool lock'
+alias al='alsamixer'
+alias bl='blueman-manager'
 
 
 
