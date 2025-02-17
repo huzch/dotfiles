@@ -1,5 +1,9 @@
 # Dotfiles
 
+![](dwm&st.png)
+
+![](show.gif)
+
 ## Overview
 
 My Terminal Workflow: Neovim + Tmux + Yazi + Lazygit
@@ -17,16 +21,5 @@ cd dotfiles
 ```
 
 ## Configuration
-
-```
-dotfiles/
-├── nvim
-├── .vimrc
-├── .tmux.conf
-├── .bashrc
-├── .gitconfig
-├── .ssh
-└── setup.sh
-```
 
 The `.vimrc` file is the configuration for vim I used to use, but now I use neovim with `nvim` configuration folder. And I learned this configuration file framework from [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/) that is a series of MIT public courses which is useful, helpful and highly recommended.
