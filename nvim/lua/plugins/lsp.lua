@@ -20,6 +20,8 @@ return {
 			local filetype = vim.bo.filetype
 			if filetype == "cpp" then
 				vim.g.coc_global_extensions = { 'coc-clangd' }
+			elseif filetype == "python" then
+				vim.g.coc_global_extensions = { 'coc-pyright' }
 			end
 
 			-- 补全选择
