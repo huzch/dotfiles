@@ -91,12 +91,11 @@ alias bl='blueman-manager'
 
 # ========= Environment =========
 
-# export PATH="$PATH:~/.local/share/nvim/lazy/fzf/bin"
-eval "$(fzf --bash)"
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 export EDITOR="nvim"
 export VISUAL="nvim"
+export PATH="$PATH:~/anaconda3/bin"
+# export PATH="$PATH:~/.local/share/nvim/lazy/fzf/bin"
+eval "$(fzf --bash)" # 在bash中启用fzf
 
 
 
