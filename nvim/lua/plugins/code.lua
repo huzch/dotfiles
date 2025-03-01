@@ -8,6 +8,12 @@ return {
 	{
 		'numToStr/Comment.nvim',
 		event = "VeryLazy",
+		config = function()
+			local ft = require('Comment.ft')
+			require('Comment').setup({})
+			ft.set('c',  '// %s')
+			ft.set('cpp', '// %s')
+		end,
 	},
 
 	{
