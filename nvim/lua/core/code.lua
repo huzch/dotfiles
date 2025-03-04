@@ -37,3 +37,25 @@ vim.keymap.set('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 vim.keymap.set('n', '|', ':vsplit<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '-', ':split<CR>', { noremap = true, silent = true })
 
+
+
+
+-- 进入 Vim 时切换到英语（美国）
+vim.api.nvim_create_autocmd("VimEnter", {
+    command = "silent !/mnt/d/im-select/im-select.exe 1033"
+})
+
+-- 进入插入模式时切换到微软拼音
+vim.api.nvim_create_autocmd("InsertEnter", {
+    command = "silent !/mnt/d/im-select/im-select.exe 2052"
+})
+
+-- 退出插入模式时切换回英语（美国）
+vim.api.nvim_create_autocmd("InsertLeave", {
+    command = "silent !/mnt/d/im-select/im-select.exe 1033"
+})
+
+-- 退出 Vim 时切换回微软拼音
+vim.api.nvim_create_autocmd("VimLeave", {
+    command = "silent !/mnt/d/im-select/im-select.exe 2052"
+})
