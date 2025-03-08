@@ -1,0 +1,12 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "ceb053f"
+hash = "dd97eede8e20e59cd2604e8006e470e2"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "ceb053f"
+hash = "7918aab6a71caf31b58411f789195677"
+
+[flavor]
+deps = []
