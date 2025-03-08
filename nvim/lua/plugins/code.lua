@@ -31,7 +31,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require('nvim-treesitter.configs').setup({
-				ensure_installed = { 'cpp', 'lua' },
+				ensure_installed = { 'cpp', 'lua', 'markdown' },
 				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = true,
@@ -54,16 +54,21 @@ return {
 		end
 	},
 
+	-- {
+	-- 	'iamcco/markdown-preview.nvim',
+	-- 	build = 'cd app && npm install',
+	-- 	ft = 'markdown',
+	-- 	keys = {
+	-- 		{ "<leader>md", ":MarkdownPreviewToggle<CR>", desc = "Toggle MarkdownPreview" },
+	-- 	},
+	-- 	config = function()
+	-- 		vim.g.mkdp_auto_start = 1
+	-- 		vim.g.mkdp_auto_close = 1
+	-- 	end,
+	-- },
+
 	{
-		'iamcco/markdown-preview.nvim',
-		build = 'cd app && npm install',
-		ft = 'markdown',
-		keys = {
-			{ "<leader>md", ":MarkdownPreviewToggle<CR>", desc = "Toggle MarkdownPreview" },
-		},
-		config = function()
-			vim.g.mkdp_auto_start = 1
-			vim.g.mkdp_auto_close = 1
-		end,
+		"OXY2DEV/markview.nvim",
+		lazy = false
 	},
 }
