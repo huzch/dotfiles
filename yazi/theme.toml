@@ -59,8 +59,8 @@ syntect_theme = ""
 
 [mode]
 
-normal_main = { bg = "blue", bold = true }
-normal_alt  = { fg = "blue", bg = "gray" }
+normal_main = { bg = "#6CACCD", bold = true }
+normal_alt  = { fg = "#6CACCD", bg = "gray" }
 
 # Select mode
 select_main = { bg = "red", bold = true }
@@ -81,7 +81,7 @@ separator_close = ""
 
 # Progress
 progress_label  = { bold = true }
-progress_normal = { fg = "blue", bg = "black" }
+progress_normal = { fg = "#6CACCD", bg = "black" }
 progress_error  = { fg = "red", bg = "black" }
 
 # Permissions
@@ -111,8 +111,8 @@ separator_style = { fg = "darkgray" }
 # : Confirmation {{{
 
 [confirm]
-border     = { fg = "blue" }
-title      = { fg = "blue" }
+border = { fg = "#87CEEB" }
+title  = { fg = "#87CEEB" }
 content    = {}
 list       = {}
 btn_yes    = { reversed = true }
@@ -125,8 +125,8 @@ btn_labels = [ "  [Y]es  ", "  (N)o  " ]
 # : Spotter {{{
 
 [spot]
-border = { fg = "blue" }
-title  = { fg = "blue" }
+border = { fg = "#87CEEB" }
+title  = { fg = "#87CEEB" }
 
 # : }}}
 
@@ -149,7 +149,7 @@ icon_error = ""
 # : Picker {{{
 
 [pick]
-border   = { fg = "blue" }
+border   = { fg = "#87CEEB" }
 active   = { fg = "magenta", bold = true }
 inactive = {}
 
@@ -159,7 +159,7 @@ inactive = {}
 # : Input {{{
 
 [input]
-border   = { fg = "blue" }
+border   = { fg = "#87CEEB" }
 title    = {}
 value    = {}
 selected = { reversed = true }
@@ -170,7 +170,7 @@ selected = { reversed = true }
 # : Completion {{{
 
 [completion]
-border   = { fg = "blue" }
+border   = { fg = "#87CEEB" }
 active   = { reversed = true }
 inactive = {}
 
@@ -185,7 +185,7 @@ icon_command = ""
 # : Task manager {{{
 
 [tasks]
-border  = { fg = "blue" }
+border  = { fg = "#87CEEB" }
 title   = {}
 hovered = { fg = "magenta", underline = true }
 

@@ -8,16 +8,16 @@ function Entity:symlink()
 	-- return to and ui.Span(string.format(" -> %s", to)):italic() or ""
 end
 
-function Status:mode()
-	local mode = tostring(self._tab.mode):upper()
-
-	local style = self:style()
-	return ui.Line {
-		ui.Span(THEME.status.separator_open):fg(style.main.bg),
-		ui.Span(" " .. mode .. " "):style(style.main),
-		ui.Span(THEME.status.separator_close):fg(style.main.bg):bg(style.alt.bg),
-	}
-end
+-- function Status:mode()
+-- 	local mode = tostring(self._tab.mode):upper()
+--
+-- 	local style = self:style()
+-- 	return ui.Line {
+-- 		ui.Span(THEME.status.separator_open):fg(style.main.bg),
+-- 		ui.Span(" " .. mode .. " "):style(style.main),
+-- 		ui.Span(THEME.status.separator_close):fg(style.main.bg):bg(style.alt.bg),
+-- 	}
+-- end
 
 function Status:name()
 	local h = self._current.hovered
