@@ -16,7 +16,6 @@ return {
 		'neoclide/coc.nvim',
 		branch = 'release',
 		event = "InsertEnter",
-		ft = { 'cpp', 'py' },
 		config = function()
 			local filetype = vim.bo.filetype
 			if filetype == "cpp" then
