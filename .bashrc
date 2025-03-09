@@ -54,10 +54,10 @@ unset color_prompt
 
 # 显示系统信息
 clear
-if command -v fastfetch &> /dev/null
-then
-    fastfetch
-fi
+# if command -v fastfetch &> /dev/null
+# then
+#     fastfetch
+# fi
 
 
 
@@ -84,8 +84,8 @@ alias lg='lazygit'
 alias ff='fastfetch'
 alias sl='slock'
 alias dl='dm-tool lock'
-alias al='alsamixer'
 alias bl='blueman-manager'
+alias pw='pwvucontrol'
 
 
 
