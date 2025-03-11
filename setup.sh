@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # 符号链接，覆盖配置文件
-ln -sf ~/dotfiles/.bashrc ~/.bashrc && echo "Linked .bashrc"
+ln -sf ~/dotfiles/bash/.bashrc ~/.bashrc && echo "Linked bash"
 ln -sf ~/dotfiles/fastfetch ~/.config && echo "Linked fastfetch"
-ln -sf ~/dotfiles/.vimrc ~/.vimrc && echo "Linked .vimrc"
+ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc && echo "Linked vim"
 ln -sf ~/dotfiles/nvim ~/.config && echo "Linked nvim"
-ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf && echo "Linked .tmux.conf"
+ln -sf ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf && echo "Linked tmux"
 ln -sf ~/dotfiles/yazi ~/.config && echo "Linked yazi"
 ln -sf ~/dotfiles/lazygit ~/.config && echo "Linked lazygit"
-ln -sf ~/dotfiles/.gdbinit ~/.gdbinit && echo "Linked .gdbinit"
-ln -sf ~/dotfiles/.gitconfig ~/.gitconfig && echo "Linked .gitconfig"
-ln -sf ~/dotfiles/.ssh/config ~/.ssh/config && echo "Linked SSH config"
+ln -sf ~/dotfiles/gdb/.gdbinit ~/.gdbinit && echo "Linked gdb"
+ln -sf ~/dotfiles/git/.gitconfig ~/.gitconfig && echo "Linked git"
+ln -sf ~/dotfiles/.ssh/config ~/.ssh/config && echo "Linked ssh"
 
 # 将仓库设置为 SSH 连接
 git remote set-url origin git@github.com:huzch/dotfiles.git && echo "Set Git remote to SSH URL."

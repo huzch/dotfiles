@@ -1,0 +1,36 @@
+[user]
+	name = huzch
+	email = huzch123@gmail.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nvim
+	autocrlf = input #控制换行符行为：input适用于Unix系统，true适用于Windows
+	safecrlf = true #防止不一致的换行符提交
+	excludesfile = ~/.gitignore_global
+
+[merge]
+	tool = nvim
+
+[diff]
+	tool = nvimdiff
+
+[push]
+	default = simple
+
+[pull]
+	rebase = false
+	ff = only #如果不能快进合并，则拒绝 pull
+
+[alias]
+	st = status
+	lg = log --all --graph --decorate --oneline
+	ci = commit
+
+[color]
+	ui = auto
+
+[log]
+	date = relative
