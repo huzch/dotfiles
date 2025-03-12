@@ -1,0 +1,97 @@
+@define-color    primary      #89b4fa;  /* 蓝色 */
+@define-color    primary-rgb  rgb(137, 180, 250);
+@define-color    accent       #3b82f6;
+@define-color    accent-rgb   rgb(116, 199, 236);
+@define-color    text         #cdd6f4;
+@define-color    text-rgb     rgb(205, 214, 244);
+@define-color    background   #1e1e2e;
+@define-color    surface      #313244;
+@define-color    highlight    #000000; 
+
+* {
+  font-family: 'Hack Nerd Font', monospace;
+  font-size: 18px;
+}
+
+/* Window */
+window {
+  margin: 0px;
+  padding: 10px;
+  border: 2px solid @primary;
+  border-radius: 8px;
+  background-color: @background;
+}
+
+/* Inner Box */
+#inner-box {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: @background;
+}
+
+/* Outer Box */
+#outer-box {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: @background;
+}
+
+/* Scroll */
+#scroll {
+  margin: 0px;
+  padding: 10px;
+  border: none;
+  background-color: @background;
+}
+
+/* Input */
+#input {
+  margin: 5px 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 0.1em;
+  color: @text;
+  background-color: @surface;
+}
+
+#input image {
+    border: none;
+    color: @primary;
+}
+
+#input * {
+  outline: 2px solid @primary!important;
+}
+
+/* Text */
+#text {
+  margin: 5px;
+  border: none;
+  color: @text;
+}
+
+#entry {
+  background-color: @surface;
+}
+
+#entry arrow {
+  border: none;
+  color: @primary;
+}
+
+/* Selected Entry */
+#entry:selected {
+  border: 0.11em solid @highlight;
+  background-color: @text;
+}
+
+#entry:selected #text {
+  color: @surface;
+}
+
+#entry:drop(active) {
+  background-color: @primary!important;
+}
+

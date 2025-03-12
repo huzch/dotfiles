@@ -3,13 +3,18 @@
 # 符号链接，覆盖配置文件
 ln -sf ~/dotfiles/bash/.bashrc ~/.bashrc && echo "Linked bash"
 ln -sf ~/dotfiles/fastfetch ~/.config && echo "Linked fastfetch"
-ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc && echo "Linked vim"
-ln -sf ~/dotfiles/nvim ~/.config && echo "Linked nvim"
-ln -sf ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf && echo "Linked tmux"
-ln -sf ~/dotfiles/yazi ~/.config && echo "Linked yazi"
-ln -sf ~/dotfiles/lazygit ~/.config && echo "Linked lazygit"
 ln -sf ~/dotfiles/gdb/.gdbinit ~/.gdbinit && echo "Linked gdb"
 ln -sf ~/dotfiles/git/.gitconfig ~/.gitconfig && echo "Linked git"
+ln -sf ~/dotfiles/hypr ~/.config && echo "Linked hypr"
+ln -sf ~/dotfiles/kitty ~/.config && echo "Linked kitty"
+ln -sf ~/dotfiles/lazygit ~/.config && echo "Linked lazygit"
+ln -sf ~/dotfiles/nvim ~/.config && echo "Linked nvim"
+ln -sf ~/dotfiles/picom ~/.config && echo "Linked picom"
+ln -sf ~/dotfiles/tmux/.tmux.conf ~/.tmux.conf && echo "Linked tmux"
+ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc && echo "Linked vim"
+ln -sf ~/dotfiles/waybar ~/.config && echo "Linked waybar"
+ln -sf ~/dotfiles/wofi ~/.config && echo "Linked wofi"
+ln -sf ~/dotfiles/yazi ~/.config && echo "Linked yazi"
 ln -sf ~/dotfiles/.ssh/config ~/.ssh/config && echo "Linked ssh"
 
 # 将仓库设置为 SSH 连接

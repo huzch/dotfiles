@@ -1,0 +1,94 @@
+* {
+    border: none;
+    border-radius: 5px;
+    font-family: "Hack Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(43, 48, 59, 0.5);
+    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#pulseaudio:hover {
+    background-color: #a37800;
+}
+
+#workspaces button {
+    color: #bbbbbb; /* 默认状态灰色 */
+    background: transparent;
+    border: none;
+    padding: 5px 8px;
+    margin: 2px;
+    border-radius: 5px;
+}
+
+#workspaces button.active {
+    color: white; /* 高亮当前 workspace */
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+}
+
+#clock {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#cpu {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FF5555; /* 红 */
+    padding: 5px 10px;
+}
+
+#memory {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFAA33; /* 橙 */
+    padding: 5px 10px;
+}
+
+#battery {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFF55; /* 黄 */
+    padding: 5px 10px;
+}
+
+#pulseaudio {
+    background: rgba(255, 255, 255, 0.1);
+    color: #55AA55; /* 绿 */
+    padding: 5px 10px;
+}
+
+#network {
+    background: rgba(255, 255, 255, 0.1);
+    color: #56B6C2; /* 蓝 */
+    padding: 5px 10px;
+}
+
+#tray {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+}
