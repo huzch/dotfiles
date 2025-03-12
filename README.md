@@ -1,8 +1,15 @@
 # Dotfiles
+dwm(xorg):
 
-![](dwm&st.png)
+![](dwm.png)
 
 ![](show.gif)
+
+hyprland(wayland):
+
+![](hypr1.png)
+![](hypr2.png)
+![](hypr3.png)
 
 ## Overview
 
