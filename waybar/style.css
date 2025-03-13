@@ -36,6 +36,10 @@ button:hover {
     background-color: #a37800;
 }
 
+#network:hover {
+    background-color: #a37800;
+}
+
 #workspaces button {
     color: #bbbbbb; /* 默认状态灰色 */
     background: transparent;
@@ -61,6 +65,12 @@ button:hover {
 #cpu {
     background: rgba(255, 255, 255, 0.1);
     color: #FF5555; /* 红 */
+    padding: 5px 10px;
+}
+
+#custom-gpu {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FF8555; /* 红 */
     padding: 5px 10px;
 }
 
