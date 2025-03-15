@@ -41,7 +41,7 @@
 	"custom/gpu": {
 		"format": "󰾲 {}%",
 		"on-click": "gpu-viewer",
-		"exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+		"exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits"
 	},
     "memory": {
         "format": " {}%"
@@ -52,11 +52,11 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}{capacity}%",
+        "format": "{icon} {capacity}%",
         "format-full": "{icon}",
         "format-charging": "{capacity}%",
         "format-plugged": "{capacity}%",
-        "format-alt": "{icon}{time}",
+        "format-alt": "{icon} {time}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
@@ -83,11 +83,9 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": " {essid}",
-        "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "on-click": "nm-connection-editor"
     },
     "tray": {
