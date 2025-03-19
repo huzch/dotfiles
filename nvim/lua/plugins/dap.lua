@@ -40,17 +40,35 @@ return {
 		config = function()
 			local dapui = require("dapui")
 			dapui.setup({
-				layouts = {
-					{
-						elements = {
-							{ id = "console", size = 0.3 }, -- 控制台占右侧的下半部分
-							{ id = "watches", size = 0.7 }  -- 监视窗口占右侧的上半部分
-						},
-						size = 40,      -- 设置右侧总宽度
-						position = "right",
+				layouts = {},
+				floating = {
+					border = "rounded",
+					mappings = {
+						close = { "q", "<Esc>" },
 					},
 				},
 			})
+
+			-- 设置浮动窗口的 keymaps
+			local function toggle_watches()
+				dapui.float_element("watches", {
+					enter = true, -- 进入窗口
+					width = 80,
+					height = 20,
+				})
+			end
+
+			local function toggle_console()
+				dapui.float_element("repl", {
+					enter = true,
+					width = 80,
+					height = 20,
+				})
+			end
+
+			-- 绑定快捷键
+			vim.keymap.set("n", "<leader>dw", toggle_watches, { desc = "Toggle DAP Watches" })
+			vim.keymap.set("n", "<leader>dc", toggle_console, { desc = "Toggle DAP Console" })
 
 			local dap = require("dap")
 			dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -62,10 +80,6 @@ return {
 			dap.listeners.before.event_exited["dapui_config"] = function()
 				dapui.close()
 			end
-
-			vim.keymap.set('n', '<leader>c', function()
-				require("dapui").float_element("console", { enter = true })
-			end, { noremap = true, silent = true, desc = "Toggle Floating Debug Console" })
 		end,
 	},
 
@@ -98,7 +112,7 @@ return {
 		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
 		opts = {
 			automatic_installation = true,
-			ensure_installed = { "codelldb" },
+			ensure_installed = { "codelldb", "debugpy" },
 			handlers = {}
 		}
 	},
