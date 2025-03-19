@@ -93,7 +93,7 @@ alias pw='pwvucontrol'
 
 export EDITOR="nvim"
 export VISUAL="nvim"
-export PATH="$PATH:~/anaconda3/bin"
+export PATH="$PATH:~/apps/anaconda3/bin"
 # export PATH="$PATH:~/.local/share/nvim/lazy/fzf/bin"
 eval "$(fzf --bash)" # 在bash中启用fzf
 
@@ -110,3 +110,15 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+__conda_setup="$('/home/huzch/apps/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/huzch/apps/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/huzch/apps/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/huzch/apps/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
