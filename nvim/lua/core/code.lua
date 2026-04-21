@@ -8,6 +8,9 @@ vim.opt.backspace = "indent,eol,start" --更灵活的退格键
 
 vim.opt.clipboard = "unnamedplus" --使用系统剪切板
 
+vim.opt.signcolumn = "yes" --始终显示符号列
+vim.opt.updatetime = 300 --更快的响应速度
+
 
 -- 设置 leader 键
 vim.g.mapleader = " "

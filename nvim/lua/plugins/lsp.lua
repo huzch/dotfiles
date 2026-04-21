@@ -1,133 +1,146 @@
 return {
 	{
-		'neoclide/coc.nvim',
-		branch = 'release',
-		event = "InsertEnter",
-		config = function()
-			local filetype = vim.bo.filetype
-			if filetype == "cpp" then
-				vim.g.coc_global_extensions = { 'coc-clangd' }
-			elseif filetype == "python" then
-				vim.g.coc_global_extensions = { 'coc-pyright' }
-			end
-
-
-			-- Some servers have issues with backup files, see #649
-			vim.opt.backup = false
-			vim.opt.writebackup = false
-
-			-- Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
-			-- delays and poor user experience
-			vim.opt.updatetime = 300
-
-			-- Always show the signcolumn, otherwise it would shift the text each time
-			-- diagnostics appeared/became resolved
-			vim.opt.signcolumn = "yes"
-
-			local keyset = vim.keymap.set
-			-- Autocomplete
-			function _G.check_back_space()
-				local col = vim.fn.col('.') - 1
-				return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
-			end
-
-			local opts = {silent = true, noremap = true, expr = true, replace_keycodes = false}
-			keyset("i", "<c-j>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-			keyset("i", "<c-k>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-			keyset("i", "<TAB>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-			vim.g.coc_snippet_next = "<TAB>"
-
-			-- Use `[g` and `]g` to navigate diagnostics
-			keyset("n", "[g", "<Plug>(coc-diagnostic-prev)", {silent = true})
-			keyset("n", "]g", "<Plug>(coc-diagnostic-next)", {silent = true})
-
-			-- GoTo code navigation
-			keyset("n", "gd", "<Plug>(coc-definition)", {silent = true})
-			keyset("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
-			keyset("n", "gi", "<Plug>(coc-implementation)", {silent = true})
-			keyset("n", "gr", "<Plug>(coc-references)", {silent = true})
-
-			-- Use K to show documentation in preview window
-			function _G.show_docs()
-				local cw = vim.fn.expand('<cword>')
-				if vim.fn.index({'vim', 'help'}, vim.bo.filetype) >= 0 then
-					vim.api.nvim_command('h ' .. cw)
-				elseif vim.api.nvim_eval('coc#rpc#ready()') then
-					vim.fn.CocActionAsync('doHover')
-				else
-					vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
-				end
-			end
-			keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
-
-			-- Symbol renaming
-			keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})
-
-			-- Add `:Format` command to format current buffer
-			vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
-
-			-- " Add `:Fold` command to fold current buffer
-			vim.api.nvim_create_user_command("Fold", "call CocAction('fold', <f-args>)", {nargs = '?'})
-		end
+		"williamboman/mason.nvim",
+		event = "VeryLazy",
+		opts = {
+			ui = {
+				border = "rounded",
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
+				},
+			},
+		},
 	},
 
-	-- {
-	-- 	"williamboman/mason.nvim", -- Mason 负责管理 LSP、DAP、格式化工具等
-	-- 	event = "VeryLazy",
-	-- 	opts = {
-	-- 		ui = {
-	-- 			border = "rounded",
-	-- 			icons = {
-	-- 				package_installed = "✓",
-	-- 				package_pending = "➜",
-	-- 				package_uninstalled = "✗"
-	-- 			}
-	-- 		}
-	-- 	}
-	-- },
-	--
-	-- {
-	-- 	"jay-babu/mason-lspconfig.nvim",
-	-- 	event = "VeryLazy",
-	-- 	dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-	-- 	opts = {
-	-- 		automatic_installation = true,
-	-- 		ensure_installed = { "clangd", "pyright" },
-	-- 		handlers = {}
-	-- 	}
-	-- },
-	--
-	-- {
-	-- 	"hrsh7th/nvim-cmp",
-	-- 	event = "InsertEnter",
-	-- 	dependencies = {
-	-- 		"hrsh7th/cmp-nvim-lsp",  -- LSP 补全
-	-- 		"hrsh7th/cmp-buffer",    -- 缓冲区补全
-	-- 		"hrsh7th/cmp-path",      -- 文件路径补全
-	-- 		"hrsh7th/cmp-cmdline",   -- 命令行补全
-	-- 		"L3MON4D3/LuaSnip",      -- 片段引擎（可选）
-	-- 		"saadparwaiz1/cmp_luasnip", -- 片段补全（可选）
-	-- 	},
-	-- 	config = function()
-	-- 		local cmp = require("cmp")
-	-- 		cmp.setup({
-	-- 			snippet = {
-	-- 				expand = function(args)
-	-- 					require("luasnip").lsp_expand(args.body) -- 需要安装 LuaSnip
-	-- 				end,
-	-- 			},
-	-- 			mapping = {
-	-- 				["<Space-Tab>"] = cmp.mapping.complete(),     -- 触发补全
-	-- 				["<Tab>"] = cmp.mapping.confirm({ select = true }), -- 确认补全项
-	-- 				["<C-j>"] = cmp.mapping.select_next_item(), -- 选择下一个
-	-- 				["<C-k>"] = cmp.mapping.select_prev_item(), -- 选择上一个
-	-- 			},
-	-- 			sources = cmp.config.sources({
-	-- 				{ name = "nvim_lsp" }, -- LSP 补全
-	-- 				{ name = "buffer" },   -- 缓冲区补全
-	-- 				{ name = "path" },     -- 文件路径补全
-	-- 			}),
-	-- 		})
-	-- 	end,
-	-- }
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+		opts = {
+			automatic_installation = true,
+			ensure_installed = {
+				"gopls",
+				"ts_ls",
+				"basedpyright",
+				"clangd",
+				"rust_analyzer",
+			},
+		},
+	},
+
+	{
+		"saghen/blink.cmp",
+		version = "1.*",
+		event = "InsertEnter",
+
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			keymap = {
+				preset = "none",
+				["<C-j>"] = { "select_next", "fallback" },
+				["<C-k>"] = { "select_prev", "fallback" },
+				["<Tab>"] = { "accept", "fallback" },
+				["<C-space>"] = { "show", "hide" },
+				["<C-u>"] = { "scroll_documentation_up" },
+				["<C-d>"] = { "scroll_documentation_down" },
+			},
+
+			appearance = {
+				nerd_font_variant = "mono",
+			},
+
+			completion = {
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 200,
+				},
+				list = {
+					selection = {
+						preselect = true,
+						auto_insert = false,
+					},
+				},
+			},
+
+			sources = {
+				default = { "lsp", "path", "buffer" },
+			},
+
+			signature = {
+				enabled = true,
+			},
+		},
+	},
+
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"saghen/blink.cmp",
+		},
+		config = function()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+			-- LSP keymaps via LspAttach autocmd
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local opts = { noremap = true, silent = true, buffer = args.buf }
+
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "[g", vim.diagnostic.goto_prev, opts)
+					vim.keymap.set("n", "]g", vim.diagnostic.goto_next, opts)
+					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+					vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+				end,
+			})
+
+			vim.api.nvim_create_user_command("Format", function()
+				vim.lsp.buf.format({ async = true })
+			end, { desc = "Format current buffer with LSP" })
+
+			-- Per-server config via vim.lsp.config (nvim 0.11+)
+			vim.lsp.config("gopls", { capabilities = capabilities })
+			vim.lsp.config("ts_ls", { capabilities = capabilities })
+			vim.lsp.config("basedpyright", { capabilities = capabilities })
+
+			vim.lsp.config("clangd", {
+				capabilities = capabilities,
+				cmd = { "clangd", "--background-index", "--clang-tidy" },
+			})
+
+			vim.lsp.config("rust_analyzer", {
+				capabilities = capabilities,
+				settings = {
+					["rust-analyzer"] = {
+						check = {
+							command = "clippy",
+						},
+					},
+				},
+			})
+
+			-- Enable all configured servers
+			vim.lsp.enable({ "gopls", "ts_ls", "basedpyright", "clangd", "rust_analyzer" })
+
+			-- Diagnostics
+			vim.diagnostic.config({
+				virtual_text = true,
+				signs = true,
+				underline = true,
+				update_in_insert = false,
+				float = {
+					border = "rounded",
+					source = true,
+				},
+			})
+		end,
+	},
 }

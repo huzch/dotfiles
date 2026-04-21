@@ -1,19 +1,28 @@
 return {
 	{
-		'windwp/nvim-autopairs',
-		event = "InsertEnter",
-		config = true,
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		event = { "BufReadPost", "BufNewFile" },
+		opts = {
+			ensure_installed = {
+				"go", "gomod", "gosum",
+				"typescript", "tsx", "javascript",
+				"python",
+				"c", "cpp",
+				"rust",
+				"lua", "vim", "vimdoc",
+				"json", "yaml", "toml", "markdown", "markdown_inline",
+				"bash", "html", "css",
+			},
+			highlight = { enable = true },
+			indent = { enable = true },
+		},
 	},
 
 	{
-		'numToStr/Comment.nvim',
-		event = "VeryLazy",
-		config = function()
-			local ft = require('Comment.ft')
-			require('Comment').setup({})
-			ft.set('c',  '// %s')
-			ft.set('cpp', '// %s')
-		end,
+		'windwp/nvim-autopairs',
+		event = "InsertEnter",
+		config = true,
 	},
 
 	{
