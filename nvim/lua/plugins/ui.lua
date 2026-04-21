@@ -1,13 +1,19 @@
 return {
 	{
-		"folke/tokyonight.nvim"
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({
+				flavour = "macchiato",
+			})
+
+			vim.cmd.colorscheme("catppuccin")
+		end,
 	},
 
 	{
 		'itchyny/lightline.vim',
-		config = function()
-			vim.cmd('colorscheme tokyonight')
-		end
 	},
 
 	{
@@ -78,32 +84,4 @@ return {
 			})
 		end
 	},
-
-	-- {
-	-- 	"nvim-tree/nvim-web-devicons",
-	-- 	opts = {} 
-	-- },
-
-	-- {
-	-- 	'nvim-tree/nvim-tree.lua',
-	-- 	keys = {
-	-- 		{ "<leader>nt", ":NvimTreeToggle<CR>",   desc = "Toggle NvimTree" },
-	-- 		{ "<leader>nf", ":NvimTreeFindFile<CR>", desc = "Find current file in NvimTree" },
-	-- 	},
-	-- 	config = function()
-	-- 		require("nvim-tree").setup({
-	-- 			filters = { dotfiles = true },
-	-- 			git = { ignore = true },
-	-- 			update_focused_file = { enable = true, update_cwd = true },
-	-- 			renderer = {
-	-- 				icons = {
-	-- 					show = { git = false, folder = false, file = false, folder_arrow = true },
-	-- 					glyphs = {
-	-- 						folder = { arrow_closed = "▸", arrow_open = "▾" },
-	-- 					},
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 	end
-	-- },
 }

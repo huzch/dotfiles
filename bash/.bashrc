@@ -82,10 +82,6 @@ alias c='clear'
 alias x='startx'
 alias lg='lazygit'
 alias ff='fastfetch'
-alias sl='slock'
-alias dl='dm-tool lock'
-alias bl='blueman-manager'
-alias pw='pwvucontrol'
 
 
 
@@ -110,15 +106,3 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
-
-__conda_setup="$('/home/huzch/apps/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/huzch/apps/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/huzch/apps/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/huzch/apps/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup

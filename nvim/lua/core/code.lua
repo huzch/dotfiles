@@ -8,17 +8,6 @@ vim.opt.backspace = "indent,eol,start" --更灵活的退格键
 
 vim.opt.clipboard = "unnamedplus" --使用系统剪切板
 
--- 用 Ctrl+o 代替 Esc
--- vim.keymap.set('i', '<C-o>', '<Esc>', { noremap = true, silent = true })
--- vim.keymap.set('v', '<C-o>', '<Esc>', { noremap = true, silent = true })
--- vim.keymap.set('s', '<C-o>', '<Esc>', { noremap = true, silent = true })
--- vim.keymap.set('x', '<C-o>', '<Esc>', { noremap = true, silent = true })
--- vim.keymap.set('c', '<C-o>', '<Esc>', { noremap = true, silent = true })
--- vim.keymap.set('o', '<C-o>', '<Esc>', { noremap = true, silent = true })
--- vim.keymap.set('l', '<C-o>', '<Esc>', { noremap = true, silent = true })
--- vim.keymap.set('t', '<C-o>', '<Esc>', { noremap = true, silent = true })
-
-
 
 -- 设置 leader 键
 vim.g.mapleader = " "
@@ -36,26 +25,3 @@ vim.keymap.set('v', '<S-Tab>', '<gv', { noremap = true, silent = true })
 -- 快速分割窗口
 vim.keymap.set('n', '|', ':vsplit<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '-', ':split<CR>', { noremap = true, silent = true })
-
-
-
-
--- 进入 Vim 时切换到英语（美国）
-vim.api.nvim_create_autocmd("VimEnter", {
-    command = "silent !/mnt/d/im-select/im-select.exe 1033"
-})
-
--- 进入插入模式时切换到微软拼音
-vim.api.nvim_create_autocmd("InsertEnter", {
-    command = "silent !/mnt/d/im-select/im-select.exe 2052"
-})
-
--- 退出插入模式时切换回英语（美国）
-vim.api.nvim_create_autocmd("InsertLeave", {
-    command = "silent !/mnt/d/im-select/im-select.exe 1033"
-})
-
--- 退出 Vim 时切换回微软拼音
-vim.api.nvim_create_autocmd("VimLeave", {
-    command = "silent !/mnt/d/im-select/im-select.exe 2052"
-})

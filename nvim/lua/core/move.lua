@@ -9,28 +9,22 @@ vim.opt.incsearch = true --启用增量搜索
 vim.opt.hlsearch = true --高亮搜索匹配项
 
 -- 禁用新手拐杖
-vim.keymap.set('n', '<Down>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('n', '<Left>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('n', '<Right>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('n', '<Up>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('i', '<Down>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('i', '<Left>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('i', '<Right>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('i', '<Up>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('v', '<Down>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('v', '<Left>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('v', '<Right>', '<Nop>', { noremap = true, silent = true })
-vim.keymap.set('v', '<Up>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<Down>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<Left>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<Right>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<Up>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('i', '<Down>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('i', '<Left>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('i', '<Right>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('i', '<Up>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('v', '<Down>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('v', '<Left>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('v', '<Right>', '<Nop>', { noremap = true, silent = true })
+-- vim.keymap.set('v', '<Up>', '<Nop>', { noremap = true, silent = true })
 
 -- 快速跳至行首和行尾
 vim.keymap.set('n', 'H', '^', { noremap = true , silent = true })
 vim.keymap.set('n', 'L', '$', { noremap = true , silent = true })
-
--- 快速跳至上下10行
--- vim.keymap.set('n', 'K', '10k', { noremap = true , silent = true })
--- vim.keymap.set('n', 'J', '10j', { noremap = true , silent = true })
--- vim.keymap.set('v', 'K', '10k', { noremap = true , silent = true })
--- vim.keymap.set('v', 'J', '10j', { noremap = true , silent = true })
 
 -- 快速窗格选择
 vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true , silent = true })
