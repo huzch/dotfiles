@@ -55,18 +55,31 @@ do_copy() {
   fi
 }
 
-set_git_remote_to_ssh() {
-  local repo="$1"
-  local url="git@github.com:huzch/dotfiles.git"
+ensure_ssh_dir() {
+  mkdir -p "$HOME/.ssh"
+  chmod 700 "$HOME/.ssh" || true
+}
 
-  command -v git >/dev/null 2>&1 || { warn "未找到 git，跳过设置 remote"; return 0; }
-  if [ ! -d "$repo/.git" ]; then
-    warn "当前目录不是 git 仓库（$repo），跳过设置 remote"
-    return 0
+setup_ssh() {
+  local src_cfg="$DOTFILES_DIR/.ssh/config"
+  local dst_cfg="$HOME/.ssh/config"
+
+  ensure_ssh_dir
+  ensure_ssh_key
+
+  local mode="copy"
+  if is_interactive; then
+    prompt_mode_for_module "ssh config -> ~/.ssh/config" mode 2
   fi
 
-  git -C "$repo" remote set-url origin "$url"
-  info "已将 dotfiles 仓库 origin 设置为 SSH：$url"
+  if [ "$mode" = "link" ]; then
+    do_link "$src_cfg" "$dst_cfg"
+    info "已软链接：ssh config -> ~/.ssh/config"
+  else
+    do_copy "$src_cfg" "$dst_cfg"
+    chmod 600 "$dst_cfg" || true
+    info "已拷贝：ssh config -> ~/.ssh/config"
+  fi
 }
 
 ensure_ssh_key() {
@@ -78,8 +91,7 @@ ensure_ssh_key() {
   fi
 
   command -v ssh-keygen >/dev/null 2>&1 || die "未找到 ssh-keygen，请先安装 OpenSSH 工具"
-  mkdir -p "$HOME/.ssh"
-  chmod 700 "$HOME/.ssh" || true
+  ensure_ssh_dir
 
   info "未找到 SSH key，开始生成：$ssh_key"
   # 默认不设置口令，避免脚本卡在交互输入
@@ -144,10 +156,11 @@ prompt_select_modules() {
 prompt_mode_for_module() {
   local label="$1"
   local out_var="$2"
+  local default_ans="${3:-1}"
   local ans
   while true; do
-    read -r -p "为【${label}】选择方式：1) 软链接  2) 拷贝  [1]：" ans
-    ans="${ans:-1}"
+    read -r -p "为【${label}】选择方式：1) 软链接  2) 拷贝  :" ans
+    ans="${ans:-$default_ans}"
     case "$ans" in
       1|l|L|link|ln) printf -v "$out_var" "%s" "link"; return 0 ;;
       2|c|C|copy|cp) printf -v "$out_var" "%s" "copy"; return 0 ;;
@@ -163,50 +176,45 @@ main() {
   local srcs=()
   local dsts=()
 
-  labels+=("bash -> ~/.bashrc")
+  labels+=("zsh -> ~/.zshrc")
   kinds+=("linkable")
-  srcs+=("$DOTFILES_DIR/bash/.bashrc")
-  dsts+=("$HOME/.bashrc")
-
-  labels+=("fastfetch -> ~/.config/fastfetch")
-  kinds+=("linkable")
-  srcs+=("$DOTFILES_DIR/fastfetch")
-  dsts+=("$HOME/.config/fastfetch")
-
-  labels+=("git -> ~/.gitconfig")
-  kinds+=("linkable")
-  srcs+=("$DOTFILES_DIR/git/.gitconfig")
-  dsts+=("$HOME/.gitconfig")
+  srcs+=("$DOTFILES_DIR/zsh/.zshrc")
+  dsts+=("$HOME/.zshrc")
 
   labels+=("nvim -> ~/.config/nvim")
   kinds+=("linkable")
   srcs+=("$DOTFILES_DIR/nvim")
   dsts+=("$HOME/.config/nvim")
 
-  labels+=("tmux -> ~/.tmux.conf")
+  labels+=("bash -> ~/.bashrc")
   kinds+=("linkable")
-  srcs+=("$DOTFILES_DIR/tmux/.tmux.conf")
-  dsts+=("$HOME/.tmux.conf")
+  srcs+=("$DOTFILES_DIR/bash/.bashrc")
+  dsts+=("$HOME/.bashrc")
 
   labels+=("vim -> ~/.vimrc")
   kinds+=("linkable")
   srcs+=("$DOTFILES_DIR/vim/.vimrc")
   dsts+=("$HOME/.vimrc")
 
-  labels+=("ssh config -> ~/.ssh/config")
+  labels+=("tmux -> ~/.tmux.conf")
   kinds+=("linkable")
-  srcs+=("$DOTFILES_DIR/.ssh/config")
-  dsts+=("$HOME/.ssh/config")
+  srcs+=("$DOTFILES_DIR/tmux/.tmux.conf")
+  dsts+=("$HOME/.tmux.conf")
 
-  labels+=("git remote: origin -> SSH")
-  kinds+=("git_remote")
+  labels+=("git -> ~/.gitconfig")
+  kinds+=("linkable")
+  srcs+=("$DOTFILES_DIR/git/.gitconfig")
+  dsts+=("$HOME/.gitconfig")
+
+  labels+=("SSH 初始化（创建 ~/.ssh；无 key 则生成；拷贝 config）")
+  kinds+=("ssh_setup")
   srcs+=("")
   dsts+=("")
 
-  labels+=("生成 SSH key（id_ed25519）")
-  kinds+=("ssh_key")
-  srcs+=("")
-  dsts+=("")
+  labels+=("fastfetch -> ~/.config/fastfetch")
+  kinds+=("linkable")
+  srcs+=("$DOTFILES_DIR/fastfetch")
+  dsts+=("$HOME/.config/fastfetch")
 
   local total="${#labels[@]}"
   info "dotfiles 目录：$DOTFILES_DIR"
@@ -285,11 +293,8 @@ main() {
           info "已软链接：$label"
         fi
         ;;
-      git_remote)
-        set_git_remote_to_ssh "$DOTFILES_DIR"
-        ;;
-      ssh_key)
-        ensure_ssh_key
+      ssh_setup)
+        setup_ssh
         ;;
       *)
         warn "未知模块类型：${kind}（${label}）"
