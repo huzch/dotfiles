@@ -7,6 +7,7 @@ vim.opt.tabstop = 4 --设置Tab宽度
 vim.opt.backspace = "indent,eol,start" --更灵活的退格键
 
 vim.opt.clipboard = "unnamedplus" --使用系统剪切板
+vim.opt.termguicolors = true --启用真彩色主题
 
 vim.opt.signcolumn = "yes" --始终显示符号列
 vim.opt.updatetime = 300 --更快的响应速度
