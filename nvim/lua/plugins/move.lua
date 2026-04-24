@@ -3,6 +3,7 @@ return {
 		'ibhagwan/fzf-lua',
 		keys = {
 			{ "<c-P>", ":FzfLua files<CR>", desc = "Fzf Files" },
+			{ "g/", ":FzfLua live_grep<CR>", desc = "Project Search" },
 		},
 		config = function()
 			require("fzf-lua").setup({})
